@@ -1,0 +1,31 @@
+{
+    "name": "安心回家",
+    "short_name": "安心回家",
+    "display": "standalone",
+    "scope": "./",
+    "start_url": "./",
+    "theme_color": "#13b188",
+    "background_color": "#13b188",
+    "icons": [
+        {
+            "src": "./img/icons-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "./img/icons-512.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "./img/icons-512.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "./img/icons-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}

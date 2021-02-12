@@ -1,0 +1,177 @@
+/* Custom page CSS */
+
+.container {
+	width: auto;
+	max-width: 680px;
+	padding: 0 30px;
+}
+
+.header {
+	background-color: #13b188;
+}
+
+.footer {
+	background-color: #ffffff;
+	/* height: 10vh; */	
+	background: url(../img/footer_bar.png) no-repeat center center, #ffffff;
+	background-size: cover;
+	overflow: hidden;
+	padding-top: 10vh;
+}
+
+body {
+	background-color: #13b188;
+}
+
+.home-head {
+	padding-top: 15vh;
+	color: #ffffff;
+	text-shadow: 0px 1px 2px #000000;
+}
+
+.home-date {
+	font-size: 12pt;
+}
+
+.home-title {
+	margin-top: 8px;
+	font-size: 23pt;
+	font-weight: bold;
+}
+
+.home-container {
+	background-color: #ffffff;
+	height: 80vh;
+	margin-top: 10vh;
+	border-radius: 30px;
+	width: 100%;
+	padding: 30px;
+}
+
+.home-enter-box {
+	position: relative;
+	margin-top: -9vh;
+	background-image: url("../img/home_enter.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 100%;
+	border-radius: 10px;
+	height: 96vw;
+}
+
+.bottom-align-text {
+	position: absolute;
+	bottom: 0;
+}
+
+.home-enter-text1 {
+	font-size: 20pt;
+	color: #ffffff;
+	text-shadow: 0px 1px 2px #000000;
+	position: absolute;
+	top: 67%;
+	left: 20px;
+}
+
+.home-enter-text2 {
+	font-size: 13pt;
+	color: #ffffff;
+	text-shadow: 0px 1px 2px #000000;
+	position: absolute;
+	top: 77%;
+	left: 20px;
+}
+
+.home-enter-text3 {
+	font-size: 13pt;
+	color: #3d856a;
+	position: absolute;
+	top: 91%;
+	left: 20px;
+}
+
+.home-enter-text4 {
+	width: 5%;
+	position: absolute;
+	top: 92%;
+	left: 90%;
+}
+
+.scan-headtext {
+	font-size: 15pt;
+	color: #ffffff;
+	text-shadow: 0px 1px 2px #000000;
+}
+
+.scan-headback {
+	width: 5%;
+	position: absolute;
+	top: 2%;
+	left: 5%;
+}
+
+.qrscanner {
+	width: 100%;
+}
+
+.qrscanner video {
+	width: 100%;
+	height: 80vh;
+}
+
+.scan-text1 {
+	font-size: 13pt;
+	color: #ffffff;
+	text-shadow: 0px 1px 2px #000000;
+	position: absolute;
+	top: 80%;
+	left: 40%;
+}
+
+.disp-container {
+	width: auto;
+	max-width: 680px;
+	padding: 0 50px;
+}
+
+.disp-line1 {
+	font-size: 12pt;
+	color: #ffffff;
+	text-shadow: 0px 1px 2px #000000;
+	margin-top: 10vh;
+}
+
+.disp-line2 {
+	font-size: 22pt;
+	color: #f9db57;
+	text-shadow: 0px 1px 2px #000000;
+	margin-top: 0.2rem;
+	font-weight: bold;
+}
+
+.disp-line3 {
+	font-size: 12pt;
+	color: #ffffff;
+	text-shadow: 0px 1px 2px #000000;
+	margin-top: 0.2rem;
+}
+
+.disp-line4 {
+	width: 30vw;
+	margin-top: 6rem;
+}
+
+.disp-line5 {
+	height: 200px;
+	background: url(../img/disp_bottom.png) no-repeat center center;
+	background-size: contain;
+	overflow: hidden;
+	margin-top: 16vh;
+}
+
+.disp-exit {
+	width: 10%;
+	position: absolute;
+	top: 2%;
+	right: 5%;
+}
