@@ -54,14 +54,16 @@
 			</div>
 		</div>
 		<div id="localtionDisplay" class="d-none">
+			<div onclick="goBack()"><img class="disp-exit" src="./img/icon_close.png"></div>
 			<div class="disp-container text-center">
-				<div onclick="goBack()"><img class="disp-exit" src="./img/icon_close.png"></div>
 				<div class="disp-line1">你已進入場所</div>
 				<div class="disp-line2" id="localName">去咗火星</div>
 				<div class="disp-line3" id="dateTimeDisp">2021-12-31 23:59</div>
+			</div>
+			<div class="text-center">
 				<img class="disp-line4" src="./img/img_checkin_success.png">
 			</div>
-			<div class="disp-line5" onclick="goBack()"></div>
+			<div class="disp-line5 fixed-bottom" onclick="goBack()"></div>
 		</div>
 	</main>
 
@@ -71,7 +73,7 @@
 
 		const html5QrCode = new Html5Qrcode("reader");
 		const qrCodeSuccessCallback = message => { /* handle success */ }
-		const config = { fps: 15, qrbox: 260 };
+		const config = { fps: 20, qrbox: 250 };
 
 		html5QrCode.start({ facingMode: "environment" }, config, qrCodeMessage => {
 			showLocation(qrCodeMessage);
@@ -89,12 +91,17 @@
 			//alert('decode: ' + b64DecodeUnicode(b64Data));
 			var jsonData = JSON.parse(b64DecodeUnicode(b64Data));
 			//alert(jsonData['nameZh']);
-			genLocationHTML(jsonData['nameZh']);
+			//alert('En' + jsonData['nameEn']);
+			if (jsonData['nameZh'] == "" || jsonData['nameZh'] == "\n") {
+				genLocationHTML(jsonData['nameEn']);
+			}else{
+				genLocationHTML(jsonData['nameZh']);
+			}
 		}
 
-		function genLocationHTML(nameZh) {
+		function genLocationHTML(displayName) {
 			document.getElementById("scanner").classList.add("d-none");
-			document.getElementById("localName").innerHTML = nameZh;
+			document.getElementById("localName").innerHTML = displayName;
 			var today = new Date();
 			var dd = String(today.getDate()).padStart(2, '0');
 			var mm = String(today.getMonth() + 1).padStart(2, '0');
