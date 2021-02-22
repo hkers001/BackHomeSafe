@@ -130,7 +130,6 @@ body {
 
 .disp-container {
 	width: auto;
-	max-width: 680px;
 	padding: 0 50px;
 }
 
@@ -166,7 +165,6 @@ body {
 	background: url(../img/disp_bottom.png) no-repeat center center;
 	background-size: contain;
 	overflow: hidden;
-	margin-top: 16vh;
 }
 
 .disp-exit {
