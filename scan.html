@@ -73,7 +73,7 @@
 
 		const html5QrCode = new Html5Qrcode("reader");
 		const qrCodeSuccessCallback = message => { /* handle success */ }
-		const config = { fps: 20, qrbox: 250 };
+		const config = { fps: 30, qrbox: 250, aspectRatio: 1.777778 };
 
 		html5QrCode.start({ facingMode: "environment" }, config, qrCodeMessage => {
 			showLocation(qrCodeMessage);
