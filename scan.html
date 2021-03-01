@@ -92,7 +92,7 @@
 			var jsonData = JSON.parse(b64DecodeUnicode(b64Data));
 			//alert(jsonData['nameZh']);
 			//alert('En' + jsonData['nameEn']);
-			if (jsonData['nameZh'] == "" || jsonData['nameZh'] == "\n") {
+			if (jsonData['nameZh'] == "" || jsonData['nameZh'] == "\n" || jsonData['nameZh'] == null  || jsonData['nameZh'] == " " || jsonData['nameZh'] == "null") {
 				genLocationHTML(jsonData['nameEn']);
 			}else{
 				genLocationHTML(jsonData['nameZh']);
