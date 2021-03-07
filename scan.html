@@ -36,7 +36,7 @@
 		</style>
 
 		<link href="./css/style.css" rel="stylesheet">
-		<script src="./js/html5-qrcode.min.js"></script>
+		<script src="./js/instascan.min.js"></script>
 	</head>
 	<body class="d-flex flex-column h-100">
 	<!-- Begin page content -->
@@ -46,8 +46,9 @@
 				<div onclick="goBack()"><img class="scan-headback" src="./img/icon_arrow_left.png"></div>
 				<span class="scan-headtext">掃描二維碼</span>
 			</div>
-			<div class="qrscanner" id="reader"></div>
+			<video id="reader" class="qrscanner" playsinline></video>
 			<div class="container">
+				<img src="./img/img_qr_code.png" class="scan-img1">
 				<div class="shadow">
 					<div class="scan-text1 text-center">掃描二維碼</div>
 				</div>
@@ -69,30 +70,37 @@
 
 	</body>
 
+
 	<script>
 
-		const html5QrCode = new Html5Qrcode("reader");
-		const qrCodeSuccessCallback = message => { /* handle success */ }
-		const config = { fps: 30, qrbox: 250, aspectRatio: 1.777778 };
-
-		html5QrCode.start({ facingMode: "environment" }, config, qrCodeMessage => {
-			showLocation(qrCodeMessage);
-			html5QrCode.stop();
-		})
-		.catch(err => {
-			//alert(`Unable to start scanning, error: ${err}`);
-			alert(err);
+		let scanner = new Instascan.Scanner({ video: document.getElementById('reader'), mirror: false, backgroundScan: false});
+		scanner.addListener('scan', function (content) {
+			showLocation(content);
+			scanner.stop();
+		});
+		Instascan.Camera.getCameras().then(function (cameras) {
+			if (cameras.length > 0) {
+				console.log
+				var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+				if (iOS) {scanner.start(cameras[0]);}else{
+					for(var i=0;i<Object.keys(cameras).length;i++){
+						if(cameras[i].name.indexOf('back')!== -1 || cameras[i].name.indexOf('Back')!== -1||cameras[i].name.indexOf('後')!== -1){scanner.start(cameras[i]);break;}
+					}
+					if(i==Object.keys(cameras).length){scanner.start(cameras[0])}
+				}
+			} else {
+				console.error('No cameras found.');
+		}
+		}).catch(function (e) {
+			console.error(e);
 		});
 
+
+
 		function showLocation(codeMsg) {
-			//alert(codeMsg);
 			var b64Data = codeMsg.substring(14);
-			//alert(b64Data);
-			//alert('decode: ' + b64DecodeUnicode(b64Data));
 			var jsonData = JSON.parse(b64DecodeUnicode(b64Data));
-			//alert(jsonData['nameZh']);
-			//alert('En' + jsonData['nameEn']);
-			if (jsonData['nameZh'] == "" || jsonData['nameZh'] == "\n" || jsonData['nameZh'] == null  || jsonData['nameZh'] == " " || jsonData['nameZh'] == "null") {
+			if (jsonData['nameZh'] == "" || jsonData['nameZh'] == "\n" || jsonData['nameZh'] == null || jsonData['nameZh'] == " " || jsonData['nameZh'] == "null") {
 				genLocationHTML(jsonData['nameEn']);
 			}else{
 				genLocationHTML(jsonData['nameZh']);

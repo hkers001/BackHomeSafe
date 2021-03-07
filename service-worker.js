@@ -42,7 +42,7 @@ self.addEventListener('install', function(event) {
         './scan.html',
         './css/style.css',
         './css/bootstrap.min.css',
-        './js/html5-qrcode.min.js',
+        './js/instascan.min.js',
         './img/disp_bottom.png',
         './img/footer_bar.png',
         './img/home_enter.jpg',
@@ -52,6 +52,7 @@ self.addEventListener('install', function(event) {
         './img/icons-192.png',
         './img/icons-512.png',
         './img/img_checkin_success.png',
+        './img/img_qr_code.png',
       ]);
     })
   );

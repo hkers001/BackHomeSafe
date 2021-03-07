@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" class="h-100">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="HKer">
+		<meta name="generator" content="HKer">
+		<link rel="manifest" href="./manifest.json">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-title" content="安心回家">
+		<link rel='apple-touch-startup-image' href='./img/icons-512.png' media='(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'/>
+		<link rel="apple-touch-icon" sizes="57x57" href="./img/icons-192.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="./img/icons-192.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="./img/icons-512.png" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<title>安心回家 Back Home Safe</title>
+		<link href="./css/bootstrap.min.css" rel="stylesheet">
+ 
+		<style>
+		.bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+			font-size: 3.5rem;
+			}
+		}
+		</style>
+
+		<link href="./css/style.css" rel="stylesheet">
+		<script src="./js/html5-qrcode.min.js"></script>
+	</head>
+	<body class="d-flex flex-column h-100">
+	<!-- Begin page content -->
+	<main role="main" class="flex-shrink-0">
+		<div id="scanner">
+			<div class="header text-center mt-2">
+				<div onclick="goBack()"><img class="scan-headback" src="./img/icon_arrow_left.png"></div>
+				<span class="scan-headtext">掃描二維碼</span>
+			</div>
+			<div class="qrscanner" id="reader"></div>
+			<div class="container">
+				<div class="shadow">
+					<div class="scan-text1 text-center">掃描二維碼</div>
+				</div>
+			</div>
+		</div>
+		<div id="localtionDisplay" class="d-none">
+			<div onclick="goBack()"><img class="disp-exit" src="./img/icon_close.png"></div>
+			<div class="disp-container text-center">
+				<div class="disp-line1">你已進入場所</div>
+				<div class="disp-line2" id="localName">去咗火星</div>
+				<div class="disp-line3" id="dateTimeDisp">2021-12-31 23:59</div>
+			</div>
+			<div class="text-center">
+				<img class="disp-line4" src="./img/img_checkin_success.png">
+			</div>
+			<div class="disp-line5 fixed-bottom" onclick="goBack()"></div>
+		</div>
+	</main>
+
+	</body>
+
+	<script>
+
+		const html5QrCode = new Html5Qrcode("reader");
+		const qrCodeSuccessCallback = message => { /* handle success */ }
+		const config = { fps: 30, qrbox: 250, aspectRatio: 1.777778 };
+
+		html5QrCode.start({ facingMode: "environment" }, config, qrCodeMessage => {
+			showLocation(qrCodeMessage);
+			html5QrCode.stop();
+		})
+		.catch(err => {
+			//alert(`Unable to start scanning, error: ${err}`);
+			alert(err);
+		});
+
+		function showLocation(codeMsg) {
+			//alert(codeMsg);
+			var b64Data = codeMsg.substring(14);
+			//alert(b64Data);
+			//alert('decode: ' + b64DecodeUnicode(b64Data));
+			var jsonData = JSON.parse(b64DecodeUnicode(b64Data));
+			//alert(jsonData['nameZh']);
+			//alert('En' + jsonData['nameEn']);
+			if (jsonData['nameZh'] == "" || jsonData['nameZh'] == "\n" || jsonData['nameZh'] == null  || jsonData['nameZh'] == " " || jsonData['nameZh'] == "null") {
+				genLocationHTML(jsonData['nameEn']);
+			}else{
+				genLocationHTML(jsonData['nameZh']);
+			}
+		}
+
+		function genLocationHTML(displayName) {
+			document.getElementById("scanner").classList.add("d-none");
+			document.getElementById("localName").innerHTML = displayName;
+			var today = new Date();
+			var dd = String(today.getDate()).padStart(2, '0');
+			var mm = String(today.getMonth() + 1).padStart(2, '0');
+			var yyyy = today.getFullYear();
+			var hh = today.getHours();
+			var min = String(today.getMinutes()).padStart(2, '0');
+			var now = yyyy + '-' + dd + '-' + mm + ' ' + hh + ':' + min;
+			document.getElementById("dateTimeDisp").innerHTML = now;
+			document.getElementById("localtionDisplay").classList.remove("d-none");
+		}
+
+		function b64DecodeUnicode(str) {
+			// Going backwards: from bytestream, to percent-encoding, to original string.
+			return decodeURIComponent(atob(str).split('').map(function(c) {
+				return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+			}).join(''));
+		}
+
+		function goBack() {
+			window.history.back();
+		}
+		
+	</script>
+</html>
