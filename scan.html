@@ -17,7 +17,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<title>安心回家 Back Home Safe</title>
 		<link href="./css/bootstrap.min.css" rel="stylesheet">
- 
+
 		<style>
 		.bd-placeholder-img {
 			font-size: 1.125rem;
@@ -36,19 +36,18 @@
 		</style>
 
 		<link href="./css/style.css" rel="stylesheet">
-		<script src="./js/instascan.min.js"></script>
+		<script src="./js/html5-qrcode.min.js"></script>
 	</head>
 	<body class="d-flex flex-column h-100">
 	<!-- Begin page content -->
 	<main role="main" class="flex-shrink-0">
 		<div id="scanner">
-			<div class="header text-center mt-2">
+			<div class="header text-center mt-3">
 				<div onclick="goBack()"><img class="scan-headback" src="./img/icon_arrow_left.png"></div>
 				<span class="scan-headtext">掃描二維碼</span>
 			</div>
-			<video id="reader" class="qrscanner" playsinline></video>
+			<div class="qrscanner" id="reader"></div>
 			<div class="container">
-				<img src="./img/img_qr_code.png" class="scan-img1">
 				<div class="shadow">
 					<div class="scan-text1 text-center">掃描二維碼</div>
 				</div>
@@ -57,6 +56,7 @@
 		<div id="localtionDisplay" class="d-none">
 			<div onclick="goBack()"><img class="disp-exit" src="./img/icon_close.png"></div>
 			<div class="disp-container text-center">
+				<img class="disp-logo" src="./img/icons-192.png">
 				<div class="disp-line1">你已進入場所</div>
 				<div class="disp-line2" id="localName">去咗火星</div>
 				<div class="disp-line3" id="dateTimeDisp">2021-12-31 23:59</div>
@@ -70,32 +70,21 @@
 
 	</body>
 
-
 	<script>
 
-		let scanner = new Instascan.Scanner({ video: document.getElementById('reader'), mirror: false, backgroundScan: false});
-		scanner.addListener('scan', function (content) {
-			showLocation(content);
-			scanner.stop();
-		});
-		Instascan.Camera.getCameras().then(function (cameras) {
-			if (cameras.length > 0) {
-				console.log
-				var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-				if (iOS) {scanner.start(cameras[0]);}else{
-					for(var i=0;i<Object.keys(cameras).length;i++){
-						if(cameras[i].name.indexOf('back')!== -1 || cameras[i].name.indexOf('Back')!== -1||cameras[i].name.indexOf('後')!== -1){scanner.start(cameras[i]);break;}
-					}
-					if(i==Object.keys(cameras).length){scanner.start(cameras[0])}
-				}
-			} else {
-				console.error('No cameras found.');
-		}
-		}).catch(function (e) {
-			console.error(e);
-		});
+		const html5QrCode = new Html5Qrcode("reader");
+		const qrCodeSuccessCallback = message => { /* handle success */ }
+		//const config = { fps: 30, qrbox: 250, aspectRatio: 1.777778 };
+		const config = { fps: 30, qrbox: 250, aspectRatio: 1.1 };
 
-
+		html5QrCode.start({ facingMode: "environment" }, config, qrCodeMessage => {
+			showLocation(qrCodeMessage);
+			html5QrCode.stop();
+		})
+		.catch(err => {
+			//alert(`Unable to start scanning, error: ${err}`);
+			alert(err);
+		});
 
 		function showLocation(codeMsg) {
 			var b64Data = codeMsg.substring(14);

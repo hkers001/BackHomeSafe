@@ -1,5 +1,7 @@
 /* Custom page CSS */
 
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap'); */
+
 .container {
 	width: auto;
 	max-width: 680px;
@@ -24,7 +26,7 @@ body {
 }
 
 .home-head {
-	padding-top: 15vh;
+	padding-top: 10vh;
 	color: #ffffff;
 	text-shadow: 0px 1px 2px #000000;
 }
@@ -50,13 +52,14 @@ body {
 
 .home-enter-box {
 	position: relative;
-	margin-top: -9vh;
+	margin-top: -10vh;
 	background-image: url("../img/home_enter.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
 	width: 100%;
 	border-radius: 10px;
 	height: 96vw;
+	box-shadow:0px 0.5px 5px #000000;
 }
 
 .bottom-align-text {
@@ -83,7 +86,7 @@ body {
 }
 
 .home-enter-text3 {
-	font-size: 13pt;
+	font-size: 14pt;
 	color: #3d856a;
 	position: absolute;
 	top: 91%;
@@ -98,26 +101,27 @@ body {
 }
 
 .scan-headtext {
-	font-size: 15pt;
+	font-size: 13pt;
 	color: #ffffff;
-	text-shadow: 0px 1px 2px #000000;
+	font-weight: 500;
+	text-shadow: 0px 1px 1px #000000;
 }
 
 .scan-headback {
-	width: 5%;
+	width: 6%;
 	position: absolute;
 	top: 2%;
 	left: 5%;
 }
 
 .qrscanner {
-	/* position: fixed; */
-	position: absolute;
-	right: 0;
+	position: absolute !important;
+	left: 50%;
 	bottom: 0;
 	min-width: 100%;
 	min-height: 93%;
 	height: 93%;
+	transform: translate(-50%, 0);
 }
 
 .scan-img1 {
@@ -135,7 +139,7 @@ body {
 	color: #ffffff;
 	text-shadow: 0px 1px 2px #000000;
 	position: absolute;
-	top: 80%;
+	top: 76%;
 	left: 38%;
 }
 
@@ -144,11 +148,16 @@ body {
 	padding: 0 50px;
 }
 
+.disp-logo {
+	width: 30%;
+	margin-top: 2rem;
+}
+
 .disp-line1 {
 	font-size: 12pt;
 	color: #ffffff;
 	text-shadow: 0px 1px 2px #000000;
-	margin-top: 10vh;
+	margin-top: 6vh;
 }
 
 .disp-line2 {
@@ -156,19 +165,21 @@ body {
 	color: #f9db57;
 	text-shadow: 0px 1px 2px #000000;
 	margin-top: 0.2rem;
-	font-weight: bold;
+	font-weight: 500;
+	font-family: 'Rubik', sans-serif;
 }
 
 .disp-line3 {
-	font-size: 12pt;
+	font-size: 13pt;
 	color: #ffffff;
 	text-shadow: 0px 1px 2px #000000;
 	margin-top: 0.2rem;
+	font-family: 'Rubik', sans-serif;
 }
 
 .disp-line4 {
-	width: 30vw;
-	margin-top: 6rem;
+	width: 29vw;
+	margin-top: 5rem;
 }
 
 .disp-line5 {
@@ -179,8 +190,15 @@ body {
 }
 
 .disp-exit {
-	width: 10%;
+	width: 8%;
 	position: absolute;
-	top: 2%;
+	top: 5%;
 	right: 5%;
 }
+
+@font-face {
+	font-family: 'Rubik';
+	src: url(../fonts/Rubik-VariableFont_wght.ttf);
+}
+
+
